@@ -1,0 +1,196 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Dark mode palettes disabled – we do custom theming */
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+@import "theme/variables";
+
+/* =========================================================
+ * Base theme tokens (light vs dark)
+ * =======================================================*/
+body.theme-light {
+  --app-text: #0f172a;
+  --app-text-muted: #4b5563;
+  --app-surface: #ffffff;
+  --app-surface-alt: #e0f2ff;
+  --app-card-title: #0f172a;
+  --app-toolbar-bg: #ffffff;
+}
+
+body.theme-dark {
+  --app-text: #e5e7eb;
+  --app-text-muted: #cbd5f5;
+  --app-surface: rgba(15, 23, 42, 0.96);
+  --app-surface-alt: rgba(15, 23, 42, 0.9);
+  --app-card-title: #e0f2fe;
+  --app-toolbar-bg: rgba(15, 23, 42, 0.98);
+}
+
+body.theme-light,
+body.theme-dark {
+  color: var(--app-text);
+  --ion-text-color: var(--app-text);
+}
+
+/* =========================================================
+ * THEMED ALERT (ion-select) – light vs dark
+ * =======================================================*/
+
+/* Light mode: keep iOS-style white sheet */
+body.theme-light .themed-alert .alert-wrapper {
+  background: #ffffff;
+  color: #111827;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  --backdrop-opacity: 0.4;
+}
+
+body.theme-dark .themed-alert .alert-wrapper {
+  background: #020617;
+  color: #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+  --backdrop-opacity: 0.8;
+}
+
+body.theme-light .themed-alert .alert-title,
+body.theme-light .themed-alert .alert-head,
+body.theme-light .themed-alert .alert-message {
+  color: #111827;
+}
+
+body.theme-dark .themed-alert .alert-title,
+body.theme-dark .themed-alert .alert-head,
+body.theme-dark .themed-alert .alert-message {
+  color: #e5e7eb;
+}
+
+/* Buttons */
+
+body.theme-light .themed-alert .alert-button-group .alert-button {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+body.theme-dark .themed-alert .alert-button-group .alert-button {
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+body.theme-light
+  .themed-alert
+  .alert-button-group
+  .alert-button[aria-pressed="true"],
+body.theme-light
+  .themed-alert
+  .alert-button-group
+  .alert-button.alert-button-role-confirm {
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+body.theme-dark
+  .themed-alert
+  .alert-button-group
+  .alert-button[aria-pressed="true"],
+body.theme-dark
+  .themed-alert
+  .alert-button-group
+  .alert-button.alert-button-role-confirm {
+  font-weight: 600;
+  color: #0ea5e9;
+}
+
+/* Radio options */
+
+body.theme-light .themed-alert .alert-radio-label {
+  color: #111827;
+}
+
+body.theme-dark .themed-alert .alert-radio-label {
+  color: #e5e7eb;
+}
+
+body.theme-light .themed-alert .alert-radio-inner {
+  background: #2563eb;
+}
+
+body.theme-dark .themed-alert .alert-radio-inner {
+  background: #38bdf8;
+}
+
+/* =========================================================
+ * DATETIME MODALS (bed / wake time + sleepiness time)
+ * =======================================================*/
+
+/* Light theme: white sheet, light wheel fade */
+body.theme-light ion-modal::part(content) {
+  background: #ffffff;
+  --background: #ffffff;
+  color: #0f172a;
+}
+
+body.theme-dark ion-modal::part(content) {
+  background: #020617;
+  --background: #020617;
+  color: #e5e7eb;
+}
+
+/* IonDatetime inside modals */
+
+body.theme-light ion-modal ion-datetime {
+  --background: #ffffff;
+  --wheel-fade-background-rgb: 255, 255, 255;
+  --background-rgb: 255, 255, 255;
+  --wheel-highlight-background: transparent;
+  --wheel-highlight-border-color: transparent;
+  color: #0f172a;
+  --color: #0f172a;
+}
+
+body.theme-light ion-modal ion-datetime::part(wheel-item) {
+  color: #1f2937;
+}
+
+body.theme-light ion-modal ion-datetime::part(wheel-item-active) {
+  background: transparent;
+  color: #2563eb;
+}
+
+body.theme-dark ion-modal ion-datetime {
+  --background: #020617;
+  --wheel-fade-background-rgb: 2, 6, 23;
+  --background-rgb: 2, 6, 23;
+  --wheel-highlight-background: transparent;
+  --wheel-highlight-border-color: transparent;
+  color: #e5e7eb;
+  --color: #e5e7eb;
+  --handle-background: #38bdf8;
+  --handle-border-color: #38bdf8;
+}
+
+/* Dark mode: keep wheel rows dark, selected row tinted blue */
+body.theme-dark ion-modal ion-datetime::part(wheel-item) {
+  color: #cbd5f5;
+}
+
+body.theme-dark ion-modal ion-datetime::part(wheel-item-active) {
+  background: transparent;
+  color: #38bdf8;
+}

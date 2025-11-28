@@ -1,0 +1,324 @@
+<ion-content
+  [fullscreen]="true"
+  class="page"
+  [ngClass]="isNight ? 'page-night' : 'page-day'"
+>
+  <!-- Global theme toggle (all tabs) -->
+  <div class="global-toggle-wrapper">
+    <button type="button" class="theme-toggle" (click)="toggleTheme()">
+      <span>{{ isNight ? '☀️' : '🌙' }}</span>
+    </button>
+  </div>
+
+  <!-- ========= OVERNIGHT TAB ========= -->
+  <ng-container *ngIf="currentTab === 'overnight'">
+    <!-- Hero section: greeting, subtitle, then SVG -->
+    <section class="hero-section">
+      <div class="hero-greeting">Let’s track your sleep schedule.</div>
+      <p class="hero-sub">{{ headerSub }}</p>
+      <p class="hero-sub streak-line" *ngIf="hasOvernightLogs">
+        You’re on a {{ streakCount }} day streak.
+      </p>
+      <img [src]="heroImage" alt="Sleep sky" class="hero-image" />
+    </section>
+
+    <!-- Mini summary pill -->
+    <div class="mini-summary" *ngIf="latestSleepHours !== null; else noNight">
+      <span class="pill-label">Last night</span>
+      <span class="pill-hours">
+        {{ latestSleepHours }} h · {{ latestLabel }}
+      </span>
+    </div>
+    <ng-template #noNight>
+      <div class="mini-summary">
+        <span class="pill-hours">
+          No nights logged yet – start by saving tonight’s bedtime.
+        </span>
+      </div>
+    </ng-template>
+
+    <!-- Bed time card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sleep time (bed)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none" class="log-row">
+          <ion-label>
+            <h3>Choose sleep time</h3>
+            <p>Tap to open calendar &amp; time picker.</p>
+          </ion-label>
+          <ion-datetime-button datetime="bedPicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="bedPicker"
+              name="bed-time"
+              presentation="date-time"
+              [(ngModel)]="bedSelection"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <p *ngIf="currentSleepStart" class="status">
+          Saved:
+          <strong>{{ currentSleepStart | date: 'short' }}</strong>
+        </p>
+        <p *ngIf="!currentSleepStart" class="status">
+          No sleep time saved yet.
+        </p>
+
+        <div class="card-actions">
+          <ion-button expand="block" (click)="saveBedTime()">Save</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Wake-up card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Wake-up time</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none" class="log-row">
+          <ion-label>
+            <h3>Choose wake-up time</h3>
+            <p>Usually the next morning.</p>
+          </ion-label>
+          <ion-datetime-button datetime="wakePicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="wakePicker"
+              name="wake-time"
+              presentation="date-time"
+              [(ngModel)]="wakeSelection"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <div class="card-actions">
+          <ion-button expand="block" (click)="saveWakeTime()">Save</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- ========= SLEEPINESS TAB ========= -->
+  <ng-container *ngIf="currentTab === 'sleepiness'">
+    <section class="tab-header-copy">
+      <h2>Sleepiness tracker</h2>
+      <p>{{ headerSub }}</p>
+    </section>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sleepiness log</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="sleepiness-chips">
+          <button
+            type="button"
+            *ngFor="let v of [1, 2, 3, 4, 5, 6, 7]"
+            class="chip"
+            [class.chip-active]="sleepinessValue === v"
+            (click)="quickSetSleepiness(v)"
+          >
+            {{ v }}
+          </button>
+        </div>
+
+        <ion-item>
+          <ion-label position="stacked">Sleepiness level (1–7)</ion-label>
+          <ion-select
+            name="sleepiness-level"
+            [(ngModel)]="sleepinessValue"
+            interface="alert"
+            [interfaceOptions]="{ cssClass: 'themed-alert' }"
+          >
+            <ion-select-option [value]="1">
+              1 — Feeling active and vital; alert; wide awake.
+            </ion-select-option>
+
+            <ion-select-option [value]="2">
+              2 — Functioning at a high level, but not at peak; able to
+              concentrate.
+            </ion-select-option>
+
+            <ion-select-option [value]="3">
+              3 — Relaxed; awake; not at full alertness; responsive.
+            </ion-select-option>
+
+            <ion-select-option [value]="4">
+              4 — A little foggy; not at peak; let down.
+            </ion-select-option>
+
+            <ion-select-option [value]="5">
+              5 — Fogginess; beginning to lose interest in remaining awake;
+              slowed down.
+            </ion-select-option>
+
+            <ion-select-option [value]="6">
+              6 — Sleepiness; prefer to be lying down; fighting sleep; woozy.
+            </ion-select-option>
+
+            <ion-select-option [value]="7">
+              7 — Almost in reverie; sleep onset soon; lost struggle to remain
+              awake.
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="log-row">
+          <ion-label>
+            <h3>Time</h3>
+            <p>Tap to pick date &amp; time.</p>
+          </ion-label>
+          <ion-datetime-button
+            datetime="sleepinessPicker"
+          ></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="sleepinessPicker"
+              name="sleepiness-time"
+              presentation="date-time"
+              [(ngModel)]="sleepinessTime"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <div class="card-actions">
+          <ion-button expand="block" (click)="addSleepiness()">
+            Log sleepiness
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reminders</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Remind me in</ion-label>
+          <ion-select
+            name="reminder-hours"
+            [(ngModel)]="reminderHours"
+            interface="alert"
+            [interfaceOptions]="{ cssClass: 'themed-alert' }"
+          >
+            <ion-select-option [value]="1">1 hour</ion-select-option>
+            <ion-select-option [value]="2">2 hours</ion-select-option>
+            <ion-select-option [value]="4">4 hours</ion-select-option>
+            <ion-select-option [value]="6">6 hours</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="card-actions">
+          <ion-button expand="block" (click)="scheduleReminder()">
+            Set sleepiness reminder
+          </ion-button>
+        </div>
+
+        <p class="hint">
+          Device notifications remind you to log your sleepiness during the day.
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- ========= HISTORY TAB ========= -->
+  <ng-container *ngIf="currentTab === 'history'">
+    <section class="tab-header-copy">
+      <h2>History</h2>
+      <p>{{ headerSub }}</p>
+    </section>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Overnight sleep</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list
+          *ngIf="overnightEntries.length; else noOvernight"
+          class="history-card"
+        >
+          <ion-item *ngFor="let entry of overnightEntries">
+            <ion-label>
+              <h2>{{ entry.dateString() }}</h2>
+              <p>{{ entry.summaryString() }}</p>
+            </ion-label>
+            <ion-button
+              slot="end"
+              fill="clear"
+              color="danger"
+              class="delete-btn"
+              (click)="deleteOvernight(entry)"
+            >
+              Delete
+            </ion-button>
+          </ion-item>
+        </ion-list>
+        <ng-template #noOvernight>
+          <p class="empty-text">No overnight logs yet.</p>
+        </ng-template>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sleepiness logs</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list
+          *ngIf="sleepinessEntries.length; else noSleepiness"
+          class="history-card"
+        >
+          <ion-item *ngFor="let entry of sleepinessEntries">
+            <ion-label>
+              <h2>{{ entry.dateString() }}</h2>
+              <p>{{ entry.summaryString() }}</p>
+            </ion-label>
+            <ion-button
+              slot="end"
+              fill="clear"
+              color="danger"
+              class="delete-btn"
+              (click)="deleteSleepiness(entry)"
+            >
+              Delete
+            </ion-button>
+          </ion-item>
+        </ion-list>
+        <ng-template #noSleepiness>
+          <p class="empty-text">No sleepiness logs yet.</p>
+        </ng-template>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
+
+<!-- Bottom tabs -->
+<ion-footer [ngClass]="isNight ? 'footer-night' : 'footer-day'">
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="currentTab">
+      <ion-segment-button value="overnight">
+        <ion-label>Overnight</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="sleepiness">
+        <ion-label>Sleepiness</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        <ion-label>History</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

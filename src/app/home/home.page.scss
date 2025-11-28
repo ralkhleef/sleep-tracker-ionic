@@ -1,0 +1,584 @@
+/* Base page themes */
+
+.page-day {
+  --background: linear-gradient(180deg, #f4f7fb 0%, #e7eef9 45%, #fdfdff 100%);
+  color: var(--app-text, #0f172a);
+}
+
+.page-night {
+  --background:
+    radial-gradient(circle at 20% 0, rgba(80, 140, 255, 0.14), transparent 38%),
+    radial-gradient(circle at 80% 0, rgba(56, 189, 248, 0.12), transparent 36%),
+    linear-gradient(180deg, #0b1629 0%, #020617 55%, #000 100%);
+  color: var(--app-text, #e5e7eb);
+}
+
+.page {
+  position: relative;
+}
+
+/* Hero section */
+
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 18px 16px 6px;
+}
+
+.hero-greeting {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.hero-sub {
+  font-size: 13px;
+  margin: 0 0 4px;
+}
+
+.streak-line {
+  font-size: 13px;
+}
+
+/* Night vs day text colors for hero + tab headers */
+.page-night .hero-greeting,
+.page-night .tab-header-copy h2 {
+  color: var(--app-text, #e5e7eb);
+}
+
+.page-night .hero-sub,
+.page-night .tab-header-copy p {
+  color: var(--app-text-muted, #cbd5f5);
+}
+
+.page-day .hero-greeting {
+  color: var(--app-text, #0f172a);
+}
+
+.page-day .hero-sub,
+.page-day .streak-line,
+.page-day .tab-header-copy p {
+  color: var(--app-text-muted, #4b5563);
+}
+
+/* Theme toggle button (sun / moon) */
+
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.global-toggle-wrapper {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  z-index: 10;
+}
+
+/* Light theme toggle look */
+.page-day .theme-toggle {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(148, 163, 184, 0.7);
+  color: #fbbf24; /* sun */
+}
+
+/* Dark theme toggle look */
+.page-night .theme-toggle {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.7);
+  color: #e5e7eb; /* moon */
+}
+
+/* Bigger, centered SVG */
+
+.hero-image {
+  width: 260px;
+  height: auto;
+  display: block;
+  margin: 4px auto 6px;
+  filter: drop-shadow(0 16px 30px rgba(15, 23, 42, 0.7));
+}
+
+/* Tab headers on other screens */
+
+.tab-header-copy {
+  padding: 16px 16px 4px;
+}
+
+.tab-header-copy h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tab-header-copy p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* Mini pill summary */
+
+.mini-summary {
+  margin: 6px 16px 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.page-day .mini-summary {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+}
+
+.page-night .mini-summary {
+  background: rgba(56, 189, 248, 0.18);
+  color: #e0f2fe;
+}
+
+.pill-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+.pill-hours {
+  font-weight: 500;
+}
+
+/* Cards + text */
+
+ion-card {
+  margin: 12px 16px;
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.16);
+  color: inherit;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.page-day ion-card {
+  --background: rgba(255, 255, 255, 0.82);
+  color: var(--app-text, #0f172a);
+}
+
+.page-night ion-card {
+  --background: rgba(12, 18, 34, 0.78);
+  color: var(--app-text, #e5e7eb);
+  border-color: rgba(56, 189, 248, 0.08);
+}
+
+ion-card-header {
+  color: inherit;
+}
+
+ion-card-title {
+  font-weight: 600;
+}
+
+.page-day ion-card-title {
+  color: var(--app-card-title, #0f172a);
+}
+
+.page-night ion-card-title {
+  color: var(--app-card-title, #e0f2fe);
+}
+
+/* Section headings + body text inside cards */
+
+ion-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.page-day ion-card h3 {
+  color: var(--app-text, #0f172a);
+}
+
+.page-night ion-card h3 {
+  color: var(--app-text, #e5e7eb);
+}
+
+ion-card p {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.page-day ion-card p {
+  color: var(--app-text-muted, #4b5563);
+}
+
+.page-night ion-card p {
+  color: var(--app-text-muted, #cbd5f5);
+}
+
+/* List / item backgrounds – remove white bars */
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  color: inherit;
+}
+
+ion-card ion-item.log-row {
+  --inner-padding-end: 0;
+}
+
+/* Special styling for items inside cards */
+
+.page-day ion-card ion-item {
+  --background: rgba(226, 232, 240, 0.6);
+  --border-color: rgba(148, 163, 184, 0.45);
+  border-radius: 12px;
+  margin-bottom: 6px;
+  color: var(--app-text, #0f172a);
+}
+
+.page-night ion-card ion-item {
+  --background: rgba(30, 41, 59, 0.7);
+  --border-color: rgba(148, 163, 184, 0.35);
+  border-radius: 12px;
+  margin-bottom: 6px;
+  color: var(--app-text, #e5e7eb);
+}
+
+ion-card ion-item h2,
+ion-card ion-item p {
+  color: inherit;
+}
+
+.history-card ion-item {
+  --inner-padding-end: 8px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  --min-height: 64px;
+}
+
+.page-day .history-card ion-item {
+  --background: rgba(226, 232, 240, 0.38);
+  --border-color: rgba(148, 163, 184, 0.35);
+  color: var(--app-text, #0f172a);
+}
+
+.page-night .history-card ion-item {
+  --background: rgba(30, 41, 59, 0.55);
+  --border-color: rgba(56, 189, 248, 0.14);
+  color: var(--app-text, #e5e7eb);
+}
+
+.history-card ion-item h2 {
+  font-size: 15px;
+  margin: 0 0 2px;
+}
+
+.history-card ion-item p {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.history-card ion-button.delete-btn {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  height: 32px;
+  --border-radius: 10px;
+  --box-shadow: none;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.page-day .history-card ion-button.delete-btn {
+  --background: rgba(239, 68, 68, 0.12);
+  --background-activated: rgba(239, 68, 68, 0.18);
+  --background-focused: rgba(239, 68, 68, 0.18);
+  --color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}
+
+.page-night .history-card ion-button.delete-btn {
+  --background: rgba(239, 68, 68, 0.18);
+  --background-activated: rgba(239, 68, 68, 0.24);
+  --background-focused: rgba(239, 68, 68, 0.24);
+  --color: #fecdd3;
+  border: 1px solid rgba(239, 68, 68, 0.32);
+}
+
+.page-day ion-select {
+  color: var(--app-text, #0f172a);
+  --color: var(--app-text, #0f172a);
+}
+
+.page-night ion-select {
+  color: var(--app-text, #e5e7eb);
+  --color: var(--app-text, #e5e7eb);
+}
+
+/* Datetime buttons */
+
+ion-datetime-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.page-day ion-datetime-button::part(native) {
+  background: #eef2ff;
+  color: #0f172a;
+  border-radius: 9999px;
+  padding-inline: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.28);
+}
+
+.page-night ion-datetime-button::part(native) {
+  background: rgba(37, 99, 235, 0.25);
+  color: #e5f2ff;
+  border-radius: 9999px;
+  padding-inline: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+}
+
+ion-datetime-button::part(text) {
+  color: inherit;
+}
+
+.page-day ion-datetime-button::part(native):hover,
+.page-day ion-datetime-button::part(native):focus-visible,
+.page-day ion-datetime-button::part(native):active {
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
+.page-night ion-datetime-button::part(native):hover,
+.page-night ion-datetime-button::part(native):focus-visible,
+.page-night ion-datetime-button::part(native):active {
+  background: rgba(37, 99, 235, 0.34);
+  transform: translateY(-1px);
+}
+
+/* Small helpers */
+
+.status {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.card-actions {
+  margin-top: 12px;
+}
+
+.empty-text {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.page-day .empty-text {
+  color: var(--app-text-muted, #4b5563);
+}
+
+.page-night .empty-text {
+  color: var(--app-text-muted, #cbd5f5);
+}
+
+.hint {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 8px;
+}
+
+/* Main buttons */
+
+ion-button {
+  --border-radius: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.page-day ion-button {
+  --background: linear-gradient(135deg, #3b82f6, #2563eb);
+  --background-hover: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --background-activated: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --background-focused: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --color: #ffffff;
+  box-shadow: none;
+}
+
+.page-night ion-button {
+  --background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  --background-hover: linear-gradient(135deg, #0ea5e9, #0284c7);
+  --background-activated: linear-gradient(135deg, #0ea5e9, #0284c7);
+  --background-focused: linear-gradient(135deg, #0ea5e9, #0284c7);
+  --color: #020617;
+  box-shadow: none;
+}
+
+/* Bottom tabs */
+
+.footer-day ion-toolbar {
+  --background: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(148, 163, 184, 0.3);
+  --color: var(--app-text, #0f172a);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.08);
+}
+
+.footer-night ion-toolbar {
+  --background: rgba(2, 6, 23, 0.9);
+  --border-color: rgba(37, 99, 235, 0.35);
+  --color: var(--app-text, #e5e7eb);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -2px 10px rgba(2, 6, 23, 0.5);
+}
+
+ion-footer ion-toolbar {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+}
+
+ion-segment {
+  --indicator-height: 3px;
+}
+
+/* Day mode tabs */
+.footer-day ion-segment {
+  --indicator-color: #2563eb;
+  --background: transparent;
+}
+
+.footer-day ion-segment,
+.footer-night ion-segment {
+  width: 100%;
+  display: flex;
+}
+
+.footer-day ion-segment-button {
+  --background: rgba(148, 163, 184, 0.18);
+  --background-hover: rgba(148, 163, 184, 0.28);
+  --background-focused: rgba(148, 163, 184, 0.32);
+  --background-activated: rgba(148, 163, 184, 0.32);
+  --background-checked: #2563eb;
+  --color: #4b5563;
+  --color-checked: #f8fafc;
+  --ripple-color: rgba(37, 99, 235, 0.2);
+  border-radius: 9999px;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  flex: 1 1 0;
+  max-width: none;
+}
+
+.footer-day ion-segment-button::part(native) {
+  background: transparent;
+  color: #4b5563;
+}
+
+.footer-day ion-segment-button.segment-button-checked::part(native) {
+  background: #2563eb;
+  color: #f8fafc;
+  box-shadow: none;
+}
+
+/* Night mode tabs – blue pill + white text */
+.footer-night ion-segment {
+  --indicator-color: #2563eb;
+  --background: transparent;
+  background: transparent;
+  border: none;
+}
+
+.footer-night ion-segment-button {
+  --background: rgba(37, 99, 235, 0.14);
+  --background-hover: rgba(37, 99, 235, 0.22);
+  --background-focused: rgba(37, 99, 235, 0.3);
+  --background-activated: rgba(37, 99, 235, 0.3);
+  --background-checked: #38bdf8; /* match primary save button */
+  --color: #e0f2fe;         /* default text */
+  --color-checked: #0f172a; /* selected text on bright pill */
+  --ripple-color: rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  flex: 1 1 0;
+  max-width: none;
+}
+
+.footer-night ion-segment-button::part(native) {
+  background: transparent;
+  color: #cbd5f5;
+}
+
+.footer-night ion-segment-button.segment-button-checked::part(native) {
+  background: #38bdf8;
+  color: #0f172a;
+  box-shadow: none;
+}
+
+.footer-night ion-segment-button::part(indicator) {
+  background: #38bdf8;
+}
+
+/* Sleepiness chips */
+
+.sleepiness-chips {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sleepiness-chips .chip {
+  border: none;
+  outline: none;
+  padding: 6px 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+/* Day chip colors */
+.page-day .sleepiness-chips .chip {
+  background: #eef2ff;
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+}
+
+.page-day .sleepiness-chips .chip-active {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* Night chip colors */
+.page-night .sleepiness-chips .chip {
+  background: rgba(59, 130, 246, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #e0f2fe;
+}
+
+.page-night .sleepiness-chips .chip-active {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #020617;
+  box-shadow: 0 2px 6px rgba(56, 189, 248, 0.28);
+}
